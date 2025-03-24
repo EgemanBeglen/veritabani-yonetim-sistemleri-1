@@ -70,3 +70,22 @@ kutuphaneNo int Foreign Key (kutuphaneNo)
 References kutuphane (kutuphaneNo),
 miktar int
 );
+
+
+use Kutuphane
+select * from Adresler
+insert into Adresler values('Kayseri','15 Temmuz','Mevlana',12,3800,'Türkiye')
+insert into Adresler (sehir, binaNo) values ('Ankara',7)
+insert into Adresler values('Kayseri','Cumhuriyet','Argıncık',27,8008,'Türkiye')
+insert into Adresler (sehir,binaNo,postaKodu,ulke) values('Moskova', 852,75156,'Rusya')
+insert into Adresler (ulke) values('Vietnam')
+
+select * from uyeler
+
+insert into uyeler values('Egemen Oğuz','Beğlen','tre99936@gmail.com','506','E',3)
+
+update uyeler set telefon = 80085 where uyeNo = 1
+update Adresler set binaNo = 456 where adresNo = 5
+update Adresler set ulke = 'Türkiye' where adresNo = 2
+
+delete from Adresler where adresNo = 5
