@@ -61,9 +61,3 @@ insert into alislar values(3, 2, 5, '02.07.2010', 17500)
 insert into alislar values(5, 5, 3, '02.08.2021', 156800)
 
 
-select distinct M.Madi, M.Msoyadi
-from satislar s
-join musteri m on M.Mno=S.MNo 
-
-select count(a.Mno) from alislar as a
-inner join musteri as m on m.Mno=a.MNo
