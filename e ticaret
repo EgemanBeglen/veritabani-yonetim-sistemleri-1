@@ -1,0 +1,27 @@
+create database ticaret
+
+use ticaret
+
+create table items (itemid int identity(1,1) not null primary key, itemcode int, itemname nvarchar(20), unitprice float, category1 nvarchar(20), category2 nvarchar(20), category3 nvarchar(20), category4 nvarchar(20), brand nvarchar(20));
+
+create table users (userid int primary key not null identity(1,1), username nvarchar(30), password int not null, namesurname nvarchar(50), email nvarchar(30), gender char, birthdate datetime, createddate datetime, telnr1 int, telnt2 int);
+
+create table countries (countryid int identity(1,1) not null primary key, country nvarchar(20));
+
+create table cities (cityid int identity(1,1) not null primary key, countryid int foreign key(countryid) references countries(countryid), city nvarchar(20));
+
+create table towns (townid int identity(1,1) not null primary key, cityid int foreign key(cityid) references cities(cityid), town nvarchar(20));
+
+create table districts (districtid int identity(1,1) not null primary key, townid int foreign key(townid) references towns(townid), district nvarchar (50));
+
+create table adress (adressid int identity(1,1) not null primary key, userid int foreign key references users(userid), countryid int foreign key references countries(countryid), cityid int foreign key references cities(cityid), townid int foreign key references towns(townid), districtid int foreign key references districts(districtid), postalcode int not null, adresstext nvarchar(50));
+
+create table orders (orderid int identity(1,1) not null primary key, userid int foreign key references users(userid), date_ datetime, totalprice float, status_ nvarchar(20), adressid int foreign key references adress(adressid));
+
+create table orderdetails (detailid int identity(1,1) not null primary key, orderid int foreign key references orders(orderid), itemid int foreign key references items(itemid), amount int, unitprice float, linetotal float);
+
+create table invoices (invoiceid int identity(1,1) not null primary key, orderid int foreign key references orders(orderid), date_ datetime, adressid int foreign key references adress(adressid), cargoficheno int not null, totalprice float);
+
+create table invoicedetails (idetailid int identity(1,1) not null primary key, invoiceid int foreign key references invoices(invoiceid), detailid int foreign key references orderdetails(detailid), itemid int foreign key references items(itemid), amount int, unitprice float, linetotal float);
+
+create table payments (paymentid int identity(1,1) not null primary key, orderid int foreign key references orders(orderid), paymenttype nvarchar(20), date_ datetime, isoc nvarchar(20), approvecode int not null, paymenttotal float);
